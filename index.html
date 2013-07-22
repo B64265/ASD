@@ -101,21 +101,18 @@
         </form>
         <br />
         <!-- Clear and Display Data Links -->
-        <!--
-	        <a href="#" id="clearData">Clear Storage</a>
-        <a href="#search" id="showData">Display Data</a>
-        <a href="#reminder" id="addNewForm" style="display:none;">Add New Reminder</a>
-        -->
         
+	    <a href="#" id="clearData">Clear Storage</a>
+        <a href="#search" id="showData">Display Data</a>        
         </div>
 		
 		<div data-role="footer" data-position="fixed" data-theme="b" id="footer">
 				<div data-role="navbar">
 					<ul>
-						<li><a href="#home">Home</a></li>
-						<li><a href="#json" class="ui-btn-active">JSON</a></li>
+						<li><a href="#home" class="ui-btn-active">Home</a></li>
+						<li><a href="#json">JSON</a></li>
 						<li><a href="#search" id="searchLink" data-ajax="true">Search</a></li>
-						<li><a href="#moreInfo">Info</a>
+						<li><a href="#moreInfo">XML</a>
 						</li>
 					</ul>
 				</div>
@@ -137,7 +134,7 @@
 						<li><a href="#home">Home</a></li>
 						<li><a href="#json">JSON</a></li>
 						<li><a href="#search" id="searchLink" data-ajax="false">Search</a></li>
-						<li><a href="#moreInfo">Info</a>
+						<li><a href="#moreInfo">XML</a>
 						</li>
 					</ul>
 				</div>
@@ -152,7 +149,7 @@
 			</div>
 			<div data-role="content">
 				<div data-role="collapsible-set">
-					<ul data-role="listview" data-inset="true" data-filter="true" id="reminderList">
+					<ul data-role="listview" data-inset="true" data-filter="false" id="reminderList">
 						<!-- JavaScript will insert data here -->
 					</ul>
 				</div>
@@ -163,7 +160,7 @@
 						<li><a href="#home">Home</a></li>
 						<li><a href="#json">JSON</a></li>
 						<li><a href="#search" class="ui-btn-active" id="searchLink" data-ajax="true">Search</a></li>
-						<li><a href="#moreInfo">Info</a>
+						<li><a href="#moreInfo">XML</a>
 						</li>
 					</ul>
 				</div>
@@ -186,7 +183,7 @@
 						<li><a href="#home">Home</a></li>
 						<li><a href="#json">JSON</a></li>
 						<li><a href="#search" data-ajax="true">Search</a></li>
-						<li><a href="#moreInfo">Info</a>
+						<li><a href="#moreInfo">XML</a>
 						</li>
 					</ul>
 				</div>
@@ -198,11 +195,7 @@
 				<a href="#home" id="sendHome" data-icon="home" class="ui-btn-right" data-ajax="true">Home</a>
 			</div>
 			<div data-role="content">
-				<ul data-role="controlgroup" style="margin: 5%" data-inset="true">
-					<a href="../Gold/index.html" rel="external" data-role="button" id="Gold" data-icon="arrow-r" data-iconpos="right">Gold App</a>
-					<a href="../Bronze/index.html" rel="external" data-role="button" id="Bronze" data-icon="arrow-r" data-iconpos="right" data-ajax="false">Bronze App</a>
-					<a href="http://github.com/B64265/MiU_Project2" data-role="button" id="GitHub" data-icon="arrow-r" data-iconpos="right">GitHub</a>
-				</ul>
+				
 			</div>
 			<div data-role="footer" data-position="fixed" data-theme="b" id="footer">
 				<div data-role="navbar">
@@ -210,7 +203,7 @@
 						<li><a href="#home">Home</a></li>
 						<li><a href="#json">JSON</a></li>
 						<li><a href="#search" data-ajax="true">Search</a></li>
-						<li><a href="#moreInfo">Info</a>
+						<li><a href="#moreInfo">XML</a>
 						</li>
 					</ul>
 				</div>
