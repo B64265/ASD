@@ -230,55 +230,9 @@ $('#showData').on('click', function(){
 				makeNewLi.appendChild(makeP);
 				makeEntry.setAttribute("id", key);	
 					
-				
-							
-				/*
-// Create List of Reminder Details
-				var makeList = document.createElement('ul');
-				makeEntry.appendChild(makeList);
-				for (var k in obj) {
-					var makeLi = document.createElement('li');
-					makeList.appendChild(makeLi);
-					var optSubText = obj[k][0]+ " " + obj[k][1];
-					makeLi.innerHTML = optSubText;
-					
-				}
-*/
-			/*
-	//Buttons set up for remove and edit
-				var buttonHolder = document.createElement('div');
-				buttonHolder.setAttribute("class", "ui-grid-a");
-				var editButtonDiv = document.createElement('div');
-				editButtonDiv.setAttribute("class", "ui-block-a");
-				var editButton = document.createElement('a');
-				editButton.setAttribute("data-role", "button");
-				editButton.setAttribute("href", "#reminder");
-				editButton.innerHTML = "Edit";
-				editButton.key = key;
-				var removeButtonDiv = document.createElement('div');
-				removeButtonDiv.setAttribute("class", "ui-block-b");
-				var removeButton = document.createElement('a');
-				removeButton.setAttribute("data-role", "button");
-				removeButton.setAttribute("href", "#");
-				removeButton.innerHTML = "Delete";
-				removeButton.key = key;
-				makeEntry.appendChild(buttonHolder);
-				buttonHolder.appendChild(editButtonDiv);
-				buttonHolder.appendChild(removeButtonDiv);
-				editButtonDiv.appendChild(editButton);
-				removeButtonDiv.appendChild(removeButton);
-				editButton.addEventListener("click", editItem);
-				removeButton.addEventListener("click", deleteItem);
-*/
+
 					
 				}else{
-				
-			/*
-	var newImg = document.createElement('img');
-				var setSrc = newImg.setAttribute("src", "img/"+ filterCats +".png");
-				newImg.setAttribute("height", "128");
-				newImg.setAttribute("width", "128");
-*/
 				
 
 				var makeEntry = document.createElement('ul');
@@ -300,20 +254,7 @@ $('#showData').on('click', function(){
 				makeNewLi.appendChild(editButton);
 				makeEntry.setAttribute("id", key);
 				console.log(obj.id);
-/*
 
-
-				//Buttons set up for remove and edit
-				var editButton = document.createElement('a');
-				editButton.setAttribute("data-role", "button");
-				editButton.setAttribute("href", "#reminder");
-				editButton.setAttribute("data-icon", "gear");
-				editButton.key = key;
-				
-				
-				makeEntry.appendChild(editButton);
-*/
-				
 				editButton.addEventListener("click", editItem(obj.id));
 			}
 			}}		
@@ -334,7 +275,209 @@ var getCurrentDate = function(){
 
 });
 
+$('#json').on('pageinit', function(){
+	//code needed for home page goes here
+	
+	
+	
+	for(var n in json){
+			
+			var id = Math.floor(Math.random()*100000001);
+			localStorage.setItem(id, JSON.stringify(json[n]));
+			
+		}
 
 
+
+	if ((this.id === "Personal") || (this.id === "Work") || (this.id === "Other")) {
+			var appendLocation = $('#jsonDisplay');
+			$('#jsonDisplay').innerHTML = "";
+			console.log("Running like it should....");
+			filterCats = this.id;
+			browseCheck = true;
+		} else {
+			var appendLocation = $('#jsonDisplay');
+			$('#jsonDisplay').innerHTML = "";
+			console.log("Running like it should.... From SEARCH");
+			browseCheck = false;
+		}
+	for (var i = 0, j = localStorage.length; i < j; i++) {
+			var key = localStorage.key(i);
+			var value = localStorage.getItem(key);
+			var obj = JSON.parse(value);
+			
+			if (browseCheck) {
+			console.log(obj.group[1]);
+				if (obj.group[1] === filterCats) {
+					readyCheck = true;
+				} else {
+					readyCheck = false;
+				}
+			} else {
+				readyCheck = true;
+			}
+			
+			if (readyCheck) {
+				if(browseCheck){
+				
+				var newImg = document.createElement('img');
+				var setSrc = newImg.setAttribute("src", "img/"+ filterCats +".png");
+				newImg.setAttribute("height", "128");
+				newImg.setAttribute("width", "128");
+				
+
+				var makeEntry = document.createElement('ul');
+				makeEntry.setAttribute("data-role", "listview");
+				appendLocation.appendChild(makeEntry);
+				var makeNewLi = document.createElement('li');
+				makeEntry.appendChild(makeNewLi);
+				makeNewLi.appendChild(newImg);
+				var makeH3 = document.createElement('h3');
+				makeH3.innerHTML = obj.remindTitle[1];
+				makeNewLi.appendChild(makeH3);
+				var makeP = document.createElement('p');
+				makeP.innerHTML = obj.description[1];
+				makeNewLi.appendChild(makeP);
+				makeEntry.setAttribute("id", key);	
+					
+
+					
+				}else{
+				
+
+				var makeEntry = document.createElement('ul');
+				makeEntry.setAttribute("data-role", "listview");
+				$('#jsonDisplay').append(makeEntry);
+				//appendLocation.appendChild(makeEntry);
+				var makeNewLi = document.createElement('li');
+				makeEntry.appendChild(makeNewLi);
+				//makeNewLi.appendChild(newImg);
+				var editButton = document.createElement('a');
+				editButton.setAttribute("href", "#home");
+				editButton.id = obj.id;
+				var makeH3 = document.createElement('h6');
+				makeH3.innerHTML = obj.remindTitle;
+				editButton.appendChild(makeH3);
+				var makeP = document.createElement('p');
+				makeP.innerHTML = obj.description;
+				editButton.appendChild(makeP);
+				makeNewLi.appendChild(editButton);
+				makeEntry.setAttribute("id", key);
+				
+
+				//editButton.addEventListener("click", editItem(obj.id));
+			}
+			}}		
+});
+
+
+$('#moreInfo').on('pageinit', function(){
+	//code needed for home page goes here
+	
+	 $('#moreInfo').get('xml.xml', function(d){  
+        $('body').append('<h1> Recommended Web Development Books </h1>');  
+        $('body').append('<dl>');  
+		console.log("This is the Title:");
+        $(d).find('book').each(function(){  
+  
+            var $book = $(this);   
+            var title = $book.attr("title");
+            console.log("This is the Title:" + title);
+            var description = $book.find('description').text();  
+            var imageurl = $book.attr('imageurl');  
+  
+            var html = '<dt> <img class="bookImage" alt="" src="' + imageurl + '" /> </dt>';  
+            html += '<dd> <span class="loadingPic" alt="Loading" />';  
+            html += '<p class="title">' + title + '</p>';  
+            html += '<p> ' + description + '</p>' ;  
+            html += '</dd>';  
+  
+            $('dl').append($(html));  
+              
+            $('.loadingPic').fadeOut(1400);  
+        });  
+    });  
+    
+    
+	if ((this.id === "Personal") || (this.id === "Work") || (this.id === "Other")) {
+			var appendLocation = $('#XMLDisplay');
+			$('#XMLDisplay').innerHTML = "";
+			console.log("Running like it should....");
+			filterCats = this.id;
+			browseCheck = true;
+		} else {
+			var appendLocation = $('#XMLDisplay');
+			$('#XMLDisplay').innerHTML = "";
+			console.log("Running like it should.... From XML");
+			browseCheck = false;
+		}
+	for (var i = 0, j = localStorage.length; i < j; i++) {
+			var key = localStorage.key(i);
+			var value = localStorage.getItem(key);
+			var obj = JSON.parse(value);
+			
+			if (browseCheck) {
+			console.log(obj.group[1]);
+				if (obj.group[1] === filterCats) {
+					readyCheck = true;
+				} else {
+					readyCheck = false;
+				}
+			} else {
+				readyCheck = true;
+			}
+			
+			if (readyCheck) {
+				if(browseCheck){
+				
+				var newImg = document.createElement('img');
+				var setSrc = newImg.setAttribute("src", "img/"+ filterCats +".png");
+				newImg.setAttribute("height", "128");
+				newImg.setAttribute("width", "128");
+				
+
+				var makeEntry = document.createElement('ul');
+				makeEntry.setAttribute("data-role", "listview");
+				appendLocation.appendChild(makeEntry);
+				var makeNewLi = document.createElement('li');
+				makeEntry.appendChild(makeNewLi);
+				makeNewLi.appendChild(newImg);
+				var makeH3 = document.createElement('h3');
+				makeH3.innerHTML = obj.remindTitle[1];
+				makeNewLi.appendChild(makeH3);
+				var makeP = document.createElement('p');
+				makeP.innerHTML = obj.description[1];
+				makeNewLi.appendChild(makeP);
+				makeEntry.setAttribute("id", key);	
+					
+
+					
+				}else{
+				
+
+				var makeEntry = document.createElement('ul');
+				makeEntry.setAttribute("data-role", "listview");
+				$('#XMLDisplay').append(makeEntry);
+				//appendLocation.appendChild(makeEntry);
+				var makeNewLi = document.createElement('li');
+				makeEntry.appendChild(makeNewLi);
+				//makeNewLi.appendChild(newImg);
+				var editButton = document.createElement('a');
+				editButton.setAttribute("href", "#home");
+				editButton.id = obj.id;
+				var makeH3 = document.createElement('h6');
+				makeH3.innerHTML = obj.remindTitle;
+				editButton.appendChild(makeH3);
+				var makeP = document.createElement('p');
+				makeP.innerHTML = obj.description;
+				editButton.appendChild(makeP);
+				makeNewLi.appendChild(editButton);
+				makeEntry.setAttribute("id", key);
+				
+
+				//editButton.addEventListener("click", editItem(obj.id));
+			}
+			}}		
+});
 
 

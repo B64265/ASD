@@ -123,11 +123,13 @@
 		<div data-role="header" data-position="fixed" data-theme="b">
 			<h1>RemindMe</h1>
 		</div>
-		
-		<div data-role="content" style="text-align: center;" data-theme="b">
-			
-		</div>
-		
+			<div data-role="content">
+				<div data-role="collapsible-set">
+					<ul data-role="listview" data-inset="true" data-filter="false" id="jsonDisplay">
+						<!-- JavaScript will insert data here -->
+					</ul>
+				</div>
+			</div>
 		<div data-role="footer" data-position="fixed" data-theme="b" id="footer">
 				<div data-role="navbar">
 					<ul>
@@ -195,6 +197,10 @@
 				<a href="#home" id="sendHome" data-icon="home" class="ui-btn-right" data-ajax="true">Home</a>
 			</div>
 			<div data-role="content">
+			<div data-role="content">
+				<ul data-role="listview" data-inset="true" id="XMLDisplay">
+					<!-- JavaScript will insert data here -->
+				</ul>
 				
 			</div>
 			<div data-role="footer" data-position="fixed" data-theme="b" id="footer">
